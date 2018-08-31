@@ -20,6 +20,7 @@ class CreateReviewsTable extends Migration
             $table->string('customer');
             $table->text('review');
             $table->integer('rating');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
