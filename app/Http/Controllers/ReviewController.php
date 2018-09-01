@@ -106,7 +106,4 @@ class ReviewController extends Controller
 }
 
 
-# Larave Simple Products/Reviews API
-
-this project is a simple api i make to learn more about laravel API Resource and the auth Passport Library it's so simple just product belong
 
