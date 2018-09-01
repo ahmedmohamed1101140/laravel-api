@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ProductNotBelongsToUser;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\Product\ProductCollection;
 use App\Http\Resources\Product\ProductResource;
 use App\Model\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
@@ -16,11 +18,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-//
-//    public function __construct()
-//    {
-//        $this->middleware('auth:api')->except('index','show');
-//    }
+
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except('index','show');
+    }
 
 
     public function index()
@@ -94,6 +96,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+        $this->CheckProductOwner($product);
         if($request->description !== null){
             $request['details'] = $request->description;
             unset($request['description']);
@@ -119,5 +122,11 @@ class ProductController extends Controller
             'response' => 'Product Deleted'
         ],Response::HTTP_NO_CONTENT);
 
+    }
+
+    protected function CheckProductOwner($product){
+        if(Auth::id() !== $product->user_id){
+            throw new ProductNotBelongsToUser;
+        }
     }
 }
