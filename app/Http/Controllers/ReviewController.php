@@ -88,6 +88,7 @@ class ReviewController extends Controller
         ],Response::HTTP_OK);
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
@@ -103,3 +104,9 @@ class ReviewController extends Controller
         ],Response::HTTP_NO_CONTENT);
     }
 }
+
+
+# Larave Simple Products/Reviews API
+
+this project is a simple api i make to learn more about laravel API Resource and the auth Passport Library it's so simple just product belong
+
